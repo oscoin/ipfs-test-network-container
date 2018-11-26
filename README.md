@@ -1,6 +1,41 @@
-IPFS Test Swarm Container
-=========================
+IPFS Test Network Container
+===========================
 
+Run an isolated, private IPFS network in a Docker container.
+
+The container runs two IPFS nodes that share a [private IPFS
+network][ipfs-private-network]. This allows for isolation from the main IPFS
+network and fast and reliable responses, especially with IPNS.
+
+[ipfs-private-network]: https://github.com/ipfs/go-ipfs/blob/master/docs/experimental-features.md#private-networks
+
+Usage
+-----
+
+```
+docker build . -t ipfs-test-network
+docker run \
+  --volume ipfs-test-data:/data \
+  --publish 4001:4001 \
+  --publish 5001:5001 \
+  --name ipfs-test-network
+  ipfs-test-network
+```
+
+You can now talk to a node in the test network from your host machine through
+the `ipfs` CLI.
+
+```
+ipfs --api /ip4/127.0.0.1/tcp/5001 swarm peers
+```
+
+You can also use the `ipfs` executable inside the container
+
+```
+docker exec -it ipfs-test-network ipfs swarm peers
+```
+
+The IPFS repos for the two nodes live in `/data/0` and `/data/1`.
 
 License
 -------
