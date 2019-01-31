@@ -4,6 +4,8 @@ set -eo pipefail
 node_id=$1
 IPFS_PATH="/data/$node_id"
 
+shift
+
 if [ ! -e "$IPFS_PATH/config" ]; then
   echo "init node"
   ipfs init
@@ -14,4 +16,4 @@ if [ ! -e "$IPFS_PATH/config" ]; then
   ipfs config Addresses.Swarm --json "[\"/ip4/127.0.0.1/tcp/400${node_id}\"]"
 fi
 
-ipfs daemon
+ipfs daemon "$@"

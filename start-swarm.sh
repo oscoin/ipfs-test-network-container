@@ -10,8 +10,8 @@ if [ ! -e /data/swarm.key ]; then
   hexdump -n 32 -e '8/4 "%08x" 1 "\n"' /dev/urandom >> /data/swarm.key
 fi
 
-/app/start-node.sh 1 &
-/app/start-node.sh 2 &
+/app/start-node.sh 1 "$@" &
+/app/start-node.sh 2 "$@" &
 
 while true; do
   sleep 1000
