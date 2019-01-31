@@ -29,6 +29,14 @@ the `ipfs` CLI.
 ipfs --api /ip4/127.0.0.1/tcp/5001 swarm peers
 ```
 
+You can pass options to all nodes in the network
+
+```
+docker run \
+  ipfs-test-network \
+  --enable-pubsub-experiment
+```
+
 You can also use the `ipfs` executable inside the container
 
 ```

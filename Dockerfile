@@ -8,10 +8,7 @@ EXPOSE 5001
 
 VOLUME /data
 
-# Overwrite entry point from base image
-ENTRYPOINT []
-
 COPY . /app
 
 # -g option stops all processes in the process group on SIGINT
-CMD ["/sbin/tini", "-g", "--", "/app/start-swarm.sh"]
+ENTRYPOINT ["/sbin/tini", "-g", "--", "/app/entrypoint.sh"]
