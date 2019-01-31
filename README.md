@@ -13,13 +13,12 @@ Usage
 -----
 
 ```
-docker build . -t ipfs-test-network
 docker run \
   --volume ipfs-test-data:/data \
   --publish 4001:4001 \
   --publish 5001:5001 \
   --name ipfs-test-network
-  ipfs-test-network
+  gcr.io/opensourcecoin/ipfs-test-network
 ```
 
 You can now talk to a node in the test network from your host machine through
