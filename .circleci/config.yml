@@ -1,0 +1,23 @@
+version: '2'
+jobs:
+  build:
+    docker:
+    - image: docker:18.09.1
+    environment:
+      IMAGE_NAME: gcr.io/opensourcecoin/ipfs-test-network
+    steps:
+    - setup_remote_docker
+    - checkout
+    - run:
+        name: Build image
+        command: |
+          docker build . --tag "$IMAGE_NAME"
+    - run:
+        name: Push image
+        command: |
+          if [[ "$CIRCLE_BRANCH" = "master" ]]; then
+            # This key belongs to circleci-image-uploader@opensourcecoin.iam.gserviceaccount.com
+            # The key ID is e7dd392d78a676d0d5bbe19ad5046aa2b9d91939
+            docker login -u _json_key -p "$(echo $GCLOUD_SERVICE_KEY | base64 -d)" https://gcr.io
+            docker push "$IMAGE_NAME"
+          fi
