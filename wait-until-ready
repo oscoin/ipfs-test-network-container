@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Poll node 1 until it is connected two node 2. Times out and exits
+# with status code 1 after 10 seconds.
+set -eo pipefail
+
+node_id="1"
+IPFS_PATH="/data/$node_id"
+
+tries_remaining=10
+
+while [ $tries_remaining -gt 1 ]; do
+	peers=$(ipfs swarm peers || true)
+	if [ -n "$peers" ]; then
+    echo "IPFS test network is ready"
+		exit
+	fi
+	let tries_remaining-=1
+	sleep 1
+done
+echo "error: Peers could not connect" 1>&2
+exit 1

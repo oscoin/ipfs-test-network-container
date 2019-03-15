@@ -38,4 +38,11 @@ ensure_ipfs_init 2
 run_ipfs 1 daemon "$@" &
 run_ipfs 2 daemon "$@" &
 
+# Make sure the daemons have started
+sleep 1
+
+# Explicitly connect the daemons
+addr1=$(run_ipfs 1 id -f "<addrs>\n")
+run_ipfs 2 swarm connect "$addr1"
+
 wait %%
