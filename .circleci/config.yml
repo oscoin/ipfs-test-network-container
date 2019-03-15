@@ -13,6 +13,22 @@ jobs:
         command: |
           docker build . --tag "$IMAGE_NAME"
     - run:
+        name: Test connection
+        command: |
+          docker run --detach --name ipfs "$IMAGE_NAME" --enable-pubsub-experiment
+
+          time docker exec ipfs /app/wait-until-ready
+          # Test if publishing works. It requires both peers to be
+          # connected.
+          docker exec ipfs ipfs name publish /ipfs/QmS4ustL54uo8FzR9455qaxZwuMiUhyvMcX9Ba8nUH4uVv
+          # Make sure that the option passed to `docker run` is picked
+          # up properly
+          docker exec ipfs ipfs pubsub pub foo bar
+    - run:
+        name: Collect container logs
+        command: docker logs ipfs
+        when: on_fail
+    - run:
         name: Push image
         command: |
           if [[ "$CIRCLE_BRANCH" = "master" ]]; then
