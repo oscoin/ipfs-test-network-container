@@ -1,4 +1,4 @@
-FROM ipfs/go-ipfs
+FROM ipfs/go-ipfs:v0.4.19
 
 # Default for running the 'ipfs' binary in the container.
 ENV IPFS_PATH=/data/1
