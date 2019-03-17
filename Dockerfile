@@ -1,4 +1,8 @@
-FROM ipfs/go-ipfs
+FROM ipfs/go-ipfs:v0.4.19
+
+# Running as non-root user has some issues. Future go-ipfs images will
+# be running as root again. See https://github.com/ipfs/go-ipfs/pull/6040
+USER 0
 
 # Default for running the 'ipfs' binary in the container.
 ENV IPFS_PATH=/data/1

@@ -21,6 +21,13 @@ docker run \
   gcr.io/opensourcecoin/ipfs-test-network
 ```
 
+To wait until the nodes have connected to each other run
+```
+docker run ipfs-test-network /app/wait-until-ready
+```
+The command will timeout after 10 seconds and exit with status code 1.
+
+
 You can now talk to a node in the test network from your host machine through
 the `ipfs` CLI.
 
