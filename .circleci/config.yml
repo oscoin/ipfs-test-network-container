@@ -11,7 +11,8 @@ jobs:
     - run:
         name: Build image
         command: |
-          docker build . --tag "$IMAGE_NAME"
+          short_sha=$(echo $CIRCLE_SHA1 | head -c 7)
+          docker build . --tag "$IMAGE_NAME:$short_sha" --tag "$IMAGE_NAME"
     - run:
         name: Test connection
         command: |
@@ -35,5 +36,8 @@ jobs:
             # This key belongs to circleci-image-uploader@opensourcecoin.iam.gserviceaccount.com
             # The key ID is e7dd392d78a676d0d5bbe19ad5046aa2b9d91939
             docker login -u _json_key -p "$(echo $GCLOUD_SERVICE_KEY | base64 -d)" https://gcr.io
+
+            short_sha=$(echo $CIRCLE_SHA1 | head -c 7)
+            docker push "$IMAGE_NAME:$short_sha"
             docker push "$IMAGE_NAME"
           fi
