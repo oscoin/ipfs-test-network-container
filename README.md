@@ -3,10 +3,12 @@ IPFS Test Network Container
 
 Run an isolated, private IPFS network in a Docker container.
 
-The container runs two IPFS nodes that share a [private IPFS
-network][ipfs-private-network]. This allows for isolation from the main IPFS
-network and fast and reliable responses, especially with IPNS.
+The container runs two IPFS nodes using [go-ipfs v0.4.18][go-ipfs-image] that
+share a [private IPFS network][ipfs-private-network]. This allows for isolation
+from the main IPFS network and fast and reliable responses, especially with
+IPNS.
 
+[go-ipfs-image]: https://hub.docker.com/r/ipfs/go-ipfs/
 [ipfs-private-network]: https://github.com/ipfs/go-ipfs/blob/master/docs/experimental-features.md#private-networks
 
 Usage
