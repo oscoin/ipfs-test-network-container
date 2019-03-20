@@ -1,4 +1,4 @@
-FROM ipfs/go-ipfs:v0.4.19
+FROM ipfs/go-ipfs:v0.4.18
 
 # Running as non-root user has some issues. Future go-ipfs images will
 # be running as root again. See https://github.com/ipfs/go-ipfs/pull/6040
