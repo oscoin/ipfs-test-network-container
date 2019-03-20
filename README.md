@@ -51,6 +51,12 @@ docker exec -it ipfs-test-network ipfs swarm peers
 
 The IPFS repos for the two nodes live in `/data/0` and `/data/1`.
 
+### Image tags
+
+For every master build we provide an image tagged with the short commit SHA.
+(That is the first seven characters of the Git commit SHA.) The latest image
+build from master has the `latest` tag.
+
 License
 -------
 
